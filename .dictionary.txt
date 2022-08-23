@@ -1,4 +1,5 @@
 ahmadnassri
+ardatan
 autocrlf
 autosetuprebase
 bdel
@@ -20,10 +21,12 @@ esbuild
 fbca
 fpnv
 gpgsign
+graphqlrc
 hmarr
 iife
 jsdevtools
 keyid
+larsgw
 lcov
 lintstagedrc
 micnncim
