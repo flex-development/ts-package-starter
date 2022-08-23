@@ -32,7 +32,7 @@ jobs:
     if: |
       github.event_name == 'pull_request' ||
       github.event_name == 'workflow_dispatch' ||
-      github.actor != 'dependabot[bot]' || !startsWith(github.event.head_commit.message, 'release:')
+      !startsWith(github.event.head_commit.message, 'release:')
     runs-on: ubuntu-latest
     steps:
       - id: debug
