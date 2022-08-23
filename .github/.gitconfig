@@ -27,14 +27,14 @@ chp = "!f() { git checkout $@ && git pull; }; f"
 # commit with message
 cm = "!f() { git commit -s -m \"$@\"; }; f"
 
-# create new local repo, perform initial commit, and push to branch main
-launchwithinit = "!f() { git init && git config branch.autosetuprebase always && git config core.ignorecase false && git config pull.rebase true && git config rebase.autoStash true && git ac \"initial commit\" && git branch -m main && git remote add origin $1 && git push origin --no-verify -u main; }; f"
-
 # tell git to start tracking branch and push to origin
 pou = "!f() { git push origin --no-verify -u $@; }; f"
 
 # remove local .git directory
 restart = "!f() { rm -rf .git; echo \"removed .git directory.\"; }; f"
+
+# create new local repo and perform initial commit
+setup = "!f() { git init && git config branch.autosetuprebase always && git config core.ignorecase false && git config pull.rebase true && git config rebase.autoStash true && git ac \"initial commit\"; }; f"
 
 # undo last commit
 ulc = "!f() { git reset head~1 --soft; }; f"

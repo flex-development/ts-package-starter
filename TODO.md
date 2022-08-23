@@ -26,37 +26,30 @@
    - Review Yarn configuration
      - [`.yarnrc.yml`](.yarnrc.yml)
        - Update [workflow](.github/workflows/) environments and permissions
-   - `git launchwithinit gh:flex-development/<project-name>`
-2. Repo Settings
-   - [ ] General
-     - [ ] Features
-       - [ ] Issues
-       - [ ] Projects
-       - [ ] Discussions
-     - [ ] Pull requests
-       - [ ] Do **NOT** allow merge commits
-       - [ ] Allow squash merging
-         - [ ] Default to pull request title
-       - [ ] Allow rebase merging
-       - [ ] Always suggest updating pull request branches
-       - [ ] Allow auto-merge
-       - [ ] Do **NOT** automatically delete head branches
-   - [ ] Code and automation
-     - [ ] Branches
-       - [ ] Add branch protection rule matching `main`
-         - [ ] Protect matching branches
-           - [ ] Require a pull request before merging
-             - [ ] Require at least `1` approval
-             - [ ] Dismiss stale pull request approvals
-           - [ ] Require status checks to pass before merging
-             - [ ] Require branches to be up to date before merging
-               - [ ] GitGuardian Security Checks
-               - [ ] ci
-           - [ ] Require conversation resolution before merging
-           - [ ] Require signed commits
-           - [ ] Require linear history
-     - [ ] Security
-       - [ ] Secrets
-         - [ ] Action secrets
-         - [ ] Dependabot secrets
-3. `git ac 'chore: complete repo setup' && git push`
+2. `git setup`
+3. `gh repo create flex-development/project-name -d="$(jq .description package.json -r)" --push --public -s=.`
+4. `gh repo edit --enable-auto-merge --enable-merge-commit=false --enable-wiki=false`
+5. Repo Settings
+   - General
+     - Features
+       - Discussions
+     - Pull requests
+       - Allow squash merging
+         - Default to pull request title
+       - Always suggest updating pull request branches
+       - Do **NOT** automatically delete head branches
+   - Code and automation
+     - Branches
+       - Add branch protection rule matching `main`
+         - Protect matching branches
+           - Require a pull request before merging
+             - Require at least `1` approval
+             - Dismiss stale pull request approvals
+           - Require status checks to pass before merging
+             - Require branches to be up to date before merging
+               - GitGuardian Security Checks
+               - ci
+               - dependabot-auto
+           - Require conversation resolution before merging
+           - Require signed commits
+           - Require linear history
