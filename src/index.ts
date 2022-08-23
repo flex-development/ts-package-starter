@@ -1,6 +1,6 @@
 /**
  * @file Package Entry Point
- * @module temp-package-name
+ * @module project-name
  */
 
 export {}
