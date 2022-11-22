@@ -23,11 +23,12 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   labels:
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - id: checkout
         name: Checkout ${{ github.ref_name }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.ref }}
       - id: sync

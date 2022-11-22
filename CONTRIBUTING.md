@@ -54,7 +54,7 @@ Follow the steps below to setup your local development environment:
    with the project's Yarn configuration, or the Yarn 2 API. Missing environment
    variables will also yield an error.
 
-7. [ZSH](docs/ZSH.md) setup
+7. [ZSH][4] setup
 
 8. Update `$ZDOTDIR/.zprofile`:
 
@@ -86,9 +86,9 @@ Follow the steps below to setup your local development environment:
 
 10. Reload shell
 
-    ```sh
-    exec $SHELL
-    ```
+   ```sh
+   exec $SHELL
+   ```
 
 ### Environment Variables
 
@@ -100,12 +100,8 @@ Follow the steps below to setup your local development environment:
 | `NODE_ENV`              |
 | `NODE_NO_WARNINGS`      |
 | `NODE_OPTIONS`          |
-| `PROJECT_CWD`**\***     |
-| `TS_NODE_PROJECT`       |
 | `VITEST_SEGFAULT_RETRY` |
 | `ZSH_DOTENV_FILE`       |
-
-**\*** Provided by [Yarn 2 scripts and binaries][4]
 
 #### GitHub Actions
 
@@ -162,20 +158,22 @@ to enforce those standards.
 This means every commit must conform to the following format:
 
 ```zsh
-<type>[optional scope][!]: <description>
- │     │               │    │
- │     │               │    │
- │     │               │    └─⫸ summary in present tense (lowercase without punctuation)
- │     │               │
- │     │               └─⫸ optional breaking change flag
+<type>[scope][!]: <description>
+ │     │      │    │
+ │     │      │    │
+ │     │      │    └─⫸ summary in present tense (lowercase without punctuation)
+ │     │      │
+ │     │      └─⫸ optional breaking change flag
  │     │
- │     └─⫸ see commitlintrc.ts
+ │     └─⫸ see commitlintrc.json
  │
  └─⫸ build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test|wip
 
-[optional body]
+[body]
 
-[optional footer(s)]
+[BREAKING CHANGE: <change>]
+
+[footer(s)]
 ```
 
 `<type>` must be one of the following values:
@@ -195,10 +193,10 @@ This means every commit must conform to the following format:
 
 e.g:
 
-- `docs: install and usage`
-- `refactor(components)!: Graph`
+- `build(deps-dev): bump cspell from 6.7.0 to 6.8.0`
+- `perf: lighten initial load`
 
-See [`.commitlintrc.ts`](.commitlintrc.ts) to view all commit guidelines.
+See [`.commitlintrc.json`](.commitlintrc.json) to view all commit guidelines.
 
 ### Code Style
 
@@ -312,25 +310,25 @@ enabled.
 When squashing, be sure to follow [commit message standards](#commit-messages):
 
 ```zsh
-<type>[optional scope][!]: <pull-request-title> (#pull-request-n)
- │     │               │    │                   │
- │     │               │    │                   │
- │     │               │    │                   └─⫸ check your pull request
- │     │               │    │
- │     │               │    └─⫸ lowercase title
- │     │               │
- │     │               └─⫸ optional breaking change flag
+<type>[scope][!]:<pull-request-title> (#pull-request-n)
+ │     │      │   │                    │
+ │     │      │   │                    │
+ │     │      │   │                    └─⫸ check pull request
+ │     │      │   │
+ │     │      │   └─⫸ lowercase title
+ │     │      │
+ │     │      └─⫸ optional breaking change flag
  │     │
- │     └─⫸ see .commitlintrc.ts
+ │     └─⫸ see .commitlintrc.json
  │
  └─⫸ build|ci|chore|docs|feat|fix|perf|refactor|release|revert|style|test
 ```
 
 e.g:
 
-- `refactor(plugin): authentication #52`
-- `perf(web): decrease page loading time #26`
-- `release: @flex-development/project-name@1.0.0 #13`
+- `ci(workflows): simplify release workflow #24`
+- `refactor: project architecture #21`
+- `release: 1.0.0 #13`
 
 ## Deployment
 
@@ -378,7 +376,7 @@ Before deploying, the following steps must be completed:
 [2]:
   https://docs.github.com/authentication/managing-commit-signature-verification/about-commit-signature-verification#gpg-commit-signature-verification
 [3]: https://yarnpkg.com/getting-started
-[4]: https://yarnpkg.com/advanced/lifecycle-scripts#environment-variables
+[4]: https://github.com/ohmyzsh/ohmyzsh
 [5]: https://github.com/typicode/husky
 [6]: https://trunkbaseddevelopment.com
 [7]: https://trunkbaseddevelopment.com/styles/#short-lived-feature-branches

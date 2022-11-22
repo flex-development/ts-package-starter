@@ -1,56 +1,109 @@
 {
   "[handlebars]": {
     "editor.defaultFormatter": "Greenbyte.handlebars-preview",
-    "editor.rulers": [100],
-    "editor.wordWrap": "wordWrapColumn",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 120
+      }
+    ],
     "editor.wordWrapColumn": 100,
     "rewrap.wrappingColumn": 100
   },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[jest-snapshot]": {
-    "editor.rulers": [120],
-    "editor.wordWrap": "wordWrapColumn",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 120
+      }
+    ],
     "editor.wordWrapColumn": 120,
     "rewrap.wrappingColumn": 120
   },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 120
+      }
+    ],
+    "editor.wordWrapColumn": 120,
+    "rewrap.wrappingColumn": 120
   },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.rulers": [100],
-    "editor.wordWrap": "wordWrapColumn",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 100
+      }
+    ],
     "editor.wordWrapColumn": 100,
     "rewrap.wrappingColumn": 100
   },
   "cSpell.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": false,
+  "editor.acceptSuggestionOnEnter": "smart",
   "editor.autoClosingBrackets": "always",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.sortJSON": false,
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.guides.indentation": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.overviewRulerBorder": true,
+  "editor.rulers": [
+    {
+      // microsoft/vscode#166261
+      "color": "var(--vscode-editorRuler-foreground)",
+      "column": 80
+    }
+  ],
+  "editor.tabSize": 2,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 80,
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "markdown": "html"
+  },
   "emmet.showExpandedAbbreviation": "always",
   "emmet.triggerExpansionOnTab": true,
   "eslint.enable": true,
   "eslint.nodePath": "./node_modules/eslint",
   "eslint.options": {
-    "extensions": ["cjs", "cts", "gql", "json", "md", "mjs", "ts", "yml"],
+    "extensions": [
+      "cjs",
+      "cts",
+      "gql",
+      "json",
+      "jsonc",
+      "md",
+      "mjs",
+      "ts",
+      "yml"
+    ],
     "overrideConfigFile": "./.eslintrc.cjs"
   },
   "eslint.validate": [
     "graphql",
     "javascript",
     "json",
+    "jsonc",
     "markdown",
     "typescript"
   ],
@@ -69,13 +122,15 @@
   "git.autofetch": true,
   "git.enableSmartCommit": true,
   "markdownlint.ignore": "./.markdownlintignore",
+  "markdown.extension.toc.slugifyMode": "github",
+  "markdown.extension.toc.updateOnSave": false,
   "npm-intellisense.scanDevDependencies": true,
   "prettier.configPath": "./.prettierrc.json",
   "prettier.enable": true,
   "prettier.ignorePath": "./.prettierignore",
   "prettier.prettierPath": "./node_modules/prettier",
   "prettier.resolveGlobalModules": false,
-  "prettier.useEditorConfig": false,
+  "prettier.useEditorConfig": true,
   "shellformat.flag": "-ci -fn -i=2 -sr",
   "typescript.suggest.completeFunctionCalls": true,
   "typescript.suggest.completeJSDocs": true,
@@ -83,34 +138,14 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vsicons.associations.files": [
     {
-      "extensions": [".commitlintrc.ts"],
-      "format": "svg",
-      "icon": "commitlint"
-    },
-    {
       "extensions": [".eslintrc.base.cjs"],
       "format": "svg",
       "icon": "eslint"
     },
     {
-      "extensions": [".graphqlrc.ts"],
+      "extensions": [".graphqlrc.yml"],
       "format": "svg",
       "icon": "graphql"
-    },
-    {
-      "extensions": [".lintstagedrc.cjs"],
-      "format": "svg",
-      "icon": "lintstagedrc"
-    },
-    {
-      "extensions": [".markdownlint.cjs", ".markdownlintignore"],
-      "format": "svg",
-      "icon": "markdownlint"
-    },
-    {
-      "extensions": ["tsnode.json"],
-      "format": "svg",
-      "icon": "tsconfig"
     },
     {
       "extensions": ["snap"],

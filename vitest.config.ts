@@ -1,35 +1,48 @@
 /**
  * @file Vitest Configuration
  * @module config/vitest
- * @see https://vitest.dev/config
+ * @see https://vitest.dev/config/
  */
 
 import { NodeEnv } from '@flex-development/tutils'
 import ci from 'is-ci'
 import path from 'node:path'
-import type { UserConfig } from 'vite'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import GithubActionsReporter from 'vitest-github-actions-reporter'
+import {
+  defineConfig,
+  type UserConfig,
+  type UserConfigExport
+} from 'vitest/config'
+import { BaseSequencer } from 'vitest/node'
 
 /**
- * Creates a {@link UserConfig} object for test environments.
+ * Vitest configuration export.
  *
- * @return {Promise<UserConfig>} Vitest configuration options
+ * @const {UserConfigExport} config
  */
-const config = async (): Promise<UserConfig> => {
-  const { BaseSequencer } = await import('vitest/node')
+const config: UserConfigExport = defineConfig((): UserConfig => {
+  /**
+   * Absolute path to [experimental loader for Node.js][1].
+   *
+   * [1]: https://nodejs.org/docs/latest-v16.x/api/esm.html#loaders
+   *
+   * @const {string} NODE_LOADER_PATH
+   */
+  const NODE_LOADER_PATH: string = path.resolve('loader.mjs')
 
   /**
-   * Path to tsconfig file.
+   * Absolute path to tsconfig file.
    *
    * @const {string} TSCONFIG_PATH
    */
-  const TSCONFIG_PATH: string = path.resolve('tsconfig.tsnode.json')
+  const TSCONFIG_PATH: string = path.resolve('tsconfig.json')
 
   return {
     define: {
-      'import.meta.env.CI': ci,
-      'import.meta.env.NODE_ENV': JSON.stringify(NodeEnv.TEST)
+      'import.meta.env.CI': JSON.stringify(ci),
+      'import.meta.env.NODE_ENV': JSON.stringify(NodeEnv.TEST),
+      'process.env.NODE_OPTIONS': JSON.stringify(`--loader=${NODE_LOADER_PATH}`)
     },
     mode: NodeEnv.TEST,
     plugins: [tsconfigpaths({ projects: [TSCONFIG_PATH] })],
@@ -103,9 +116,9 @@ const config = async (): Promise<UserConfig> => {
         min: false,
         printFunctionName: true
       },
-      testTimeout: 10 * 1000
+      testTimeout: 15 * 1000
     }
   }
-}
+})
 
 export default config

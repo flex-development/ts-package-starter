@@ -7,9 +7,7 @@
 
 import path from 'node:path'
 import { createEsmHooks, register } from 'ts-node'
-import { configLoader } from 'tsconfig-paths/lib/config-loader'
-import { createMatchPath } from 'tsconfig-paths/lib/match-path-sync'
-import { load as loadtsconfig } from 'tsconfig/dist/tsconfig'
+import { createMatchPath, loadConfig } from 'tsconfig-paths'
 
 /**
  * @type {import('ts-node').NodeLoaderHooksAPI2}
@@ -43,7 +41,7 @@ export const load = async (url, context, defaultLoad) => {
 
 /**
  * Returns the resolved file URL for `specifier` and `context.parentURL` and,
- * optionally, its format as a hint to {@link load}.
+ * optionally, its format as a hint to {@linkcode load}.
  *
  * **Note**: Path aliases found in tsconfig(s) are respected during resolution.
  *
@@ -55,52 +53,17 @@ export const load = async (url, context, defaultLoad) => {
  * @param {ResolveHookContext} context - Hook context
  * @param {string[]} context.conditions - Import conditions
  * @param {ImportAssertions} context.importAssertions - Import assertions map
- * @param {string} [context.parentURL] - `file:` url of importer
+ * @param {string} [context.parentURL] - Url `specifier` is resolved from
  * @param {ResolveHook} defaultResolve - Node.js default resolver
  * @return {Promise<ResolveHookResult>} Hook result
  * @throws {Error}
  */
 export const resolve = async (specifier, context, defaultResolve) => {
   /**
-   * @type {string}
-   * @const PWD - Path to root project directory
-   */
-  const PWD = path.resolve('.')
-
-  /**
-   * @type {string}
-   * @const TS_NODE_PROJECT - Tsconfig file name or path
-   */
-  const TS_NODE_PROJECT = process.env.TS_NODE_PROJECT ?? 'tsconfig.json'
-
-  /**
-   * @type {import('tsconfig.json')}
-   * @const tsconfig - Base tsconfig
-   */
-  const tsconfig = (await loadtsconfig(PWD, 'tsconfig.json')).config
-
-  /**
-   * @type {import('tsconfig.json')}
-   * @const tsconfig2 - Secondary tsconfig
-   */
-  const tsconfig2 = (await loadtsconfig(PWD, TS_NODE_PROJECT)).config
-
-  /**
    * @type {import('tsconfig-paths').ConfigLoaderResult}
    * @const result - `tsconfig-paths` config loader result
    */
-  const result = configLoader({
-    cwd: PWD,
-    explicitParams: {
-      addMatchAll: true,
-      baseUrl: PWD,
-      mainFields: ['module', 'main'],
-      paths: {
-        ...tsconfig.compilerOptions.paths,
-        ...tsconfig2.compilerOptions.paths
-      }
-    }
-  })
+  const result = loadConfig(path.resolve('.'))
 
   if (result.resultType === 'failed') throw new Error(result.message)
 
@@ -110,7 +73,18 @@ export const resolve = async (specifier, context, defaultResolve) => {
       result.paths,
       result.mainFields,
       result.addMatchAll
-    )(specifier) ?? specifier
+    )(specifier, undefined, undefined, [
+      '.mjs',
+      '.cjs',
+      '.js',
+      '.jsx',
+      '.mts',
+      '.cts',
+      '.ts',
+      '.tsx',
+      '.json',
+      '.css'
+    ]) ?? specifier
 
   return hooks.resolve(specifier, context, defaultResolve)
 }

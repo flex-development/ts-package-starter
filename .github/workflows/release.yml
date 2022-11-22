@@ -44,10 +44,10 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.0.1
+        uses: hmarr/debug-action@v2.1.0
       - id: checkout
         name: Checkout ${{ env.REF }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ env.REF }}
       - id: version
@@ -82,13 +82,13 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ github.event.inputs.sha || 'event.pull_request.merge_commit_sha' }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 0
           ref: ${{ github.event.inputs.sha || github.event.pull_request.merge_commit_sha }}
       - id: gpg-import
         name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v5.1.0
+        uses: crazy-max/ghaction-import-gpg@v5.2.0
         with:
           git_config_global: true
           git_tag_gpgsign: true
@@ -114,13 +114,11 @@ jobs:
         run: yarn pack -o %s-%v.tgz
         env:
           NODE_ENV: production
-          NODE_NO_WARNINGS: 1
-          NODE_OPTIONS: --es-module-specifier-resolution=node
       - id: release-notes
         name: Generate release notes
         run: yarn conventional-changelog -o $NOTES_FILE
         env:
-          TS_NODE_PROJECT: ./tsconfig.tsnode.json
+          NODE_NO_WARNINGS: 1
       - id: tag
         name: Create annotated tag
         run: |
@@ -136,7 +134,7 @@ jobs:
         name: Publish release
         run: gh release create $TAG *.tgz -t=$TAG -F=$NOTES_FILE -p=$PRERELEASE
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_ADMIN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_BOT }}
           PRERELEASE: ${{ needs.metadata.outputs.prerelease }}
   cleanup:
     needs: [metadata, publish]

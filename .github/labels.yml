@@ -26,16 +26,8 @@
 # scope labels
 # project-specific groups for issues, pull requests, and discussions
 
-- name: scope:cjs
-  description: commonjs
-  color: 74cefc
-
 - name: scope:dependencies
   description: dependency updates
-  color: 74cefc
-
-- name: scope:esm
-  description: es modules
   color: 74cefc
 
 - name: scope:release

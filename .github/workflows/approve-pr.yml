@@ -18,7 +18,7 @@ on:
     types:
       - review_requested
 env:
-  GITHUB_TOKEN: ${{ secrets.PAT_ADMIN }}
+  GITHUB_TOKEN: ${{ secrets.PAT_BOT }}
 jobs:
   approve-pr:
     if: github.event.requested_reviewer.login == 'flexdevelopment'
@@ -27,12 +27,12 @@ jobs:
       - id: dependabot-metadata
         name: Fetch dependabot metadata
         if: github.actor == 'dependabot[bot]'
-        uses: dependabot/fetch-metadata@v1.3.3
+        uses: dependabot/fetch-metadata@v1.3.5
         with:
           skip-commit-verification: true
       - id: checkout
         name: Checkout ${{ github.head_ref }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           persist-credentials: false
           ref: ${{ github.head_ref }}

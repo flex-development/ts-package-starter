@@ -14,19 +14,27 @@
   "flagWords": [],
   "ignorePaths": [
     "**/*.snap",
+    "**/.gitconfig",
     "**/.gitignore",
+    "**/.gitkeep",
+    "**/.npmignore",
     ".cspell.json",
     ".env*",
+    ".eslintignore",
     ".git/",
     ".husky/_/",
+    ".markdownlintignore",
+    ".nvmrc",
+    ".prettierignore",
     ".yarn/",
     "CHANGELOG.md",
     "LICENSE.md",
     "__tests__/report.json",
     "dist/",
+    "patches/",
     "yarn.lock"
   ],
-  "ignoreRegExpList": [],
+  "ignoreRegExpList": ["/@flex-development\\/.*/", "/from\\s+(['\"]).*\\1/"],
   "ignoreWords": [],
   "language": "en-US",
   "patterns": [],
@@ -34,5 +42,5 @@
   "useGitignore": true,
   "usePnP": false,
   "version": "0.2",
-  "words": ["fldv"]
+  "words": ["fldv", "flexdevelopmentllc"]
 }

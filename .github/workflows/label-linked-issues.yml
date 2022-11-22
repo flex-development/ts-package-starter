@@ -33,7 +33,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout main
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           persist-credentials: false
           ref: main
@@ -42,7 +42,7 @@ jobs:
         run: echo "::set-output name=result::$(jq .version package.json -r)"
       - id: query
         name: Query linked issues
-        uses: octokit/graphql-action@v2.2.22
+        uses: octokit/graphql-action@v2.2.23
         with:
           query: |
             query ($limit: Int = 20, $owner: String!, $pr: Int!, $repo: String!) {
@@ -66,7 +66,7 @@ jobs:
           repo: ${{ github.event.repository.name }}
       - id: label
         name: Label linked issues
-        uses: actions/github-script@v6.1.1
+        uses: actions/github-script@v6.3.3
         env:
           DATA: ${{ steps.query.outputs.data }}
           PRERELEASE: ${{ contains(steps.version.outputs.result, '-') }}

@@ -9,7 +9,7 @@
 # - https://github.com/hmarr/debug-action
 
 ---
-name: continuous-integration
+name: ci
 on:
   pull_request:
   push:
@@ -37,10 +37,10 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.0.1
+        uses: hmarr/debug-action@v2.1.0
       - id: checkout
         name: Checkout ${{ env.REF }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ env.REF }}
       - id: yarn
@@ -60,19 +60,20 @@ jobs:
       - id: spelling
         name: Check spelling
         run: yarn check:spelling
+      - id: types
+        name: Check types
+        run: yarn check:types
+      - id: types-build
+        name: Check types build
+        run: yarn check:types:build
       - id: test
         name: Run tests
         run: yarn test:cov
         env:
-          NODE_ENV: test
           NODE_NO_WARNINGS: 1
-          NODE_OPTIONS: --es-module-specifier-resolution=node
-          TS_NODE_PROJECT: ./tsconfig.tsnode.json
           VITEST_SEGFAULT_RETRY: 3
       - id: pack
         name: Pack project
         run: yarn pack -o %s-%v.tgz
         env:
           NODE_ENV: production
-          NODE_NO_WARNINGS: 1
-          NODE_OPTIONS: --es-module-specifier-resolution=node

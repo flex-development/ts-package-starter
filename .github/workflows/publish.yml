@@ -28,7 +28,7 @@ on:
 env:
   ARTIFACT:
     ${{ github.event.inputs.artifact || github.event.release.assets[0].browser_download_url }}
-  NODE_VERSION: 16.16.0
+  NODE_VERSION: 16
   SCOPE: ${{ format('@{0}', github.repository_owner) }}
 jobs:
   metadata:
@@ -41,10 +41,10 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.0.1
+        uses: hmarr/debug-action@v2.1.0
       - id: checkout
         name: Checkout ${{ env.TAG }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ format('refs/tags/{0}', env.TAG) }}
       - id: version
@@ -68,7 +68,7 @@ jobs:
     steps:
       - id: npmrc
         name: Setup .npmrc file
-        uses: actions/setup-node@v3.5.0
+        uses: actions/setup-node@v3.5.1
         with:
           always-auth: true
           node-version: ${{ env.NODE_VERSION }}
@@ -90,7 +90,7 @@ jobs:
     steps:
       - id: npmrc
         name: Setup .npmrc file
-        uses: actions/setup-node@v3.5.0
+        uses: actions/setup-node@v3.5.1
         with:
           always-auth: true
           node-version: ${{ env.NODE_VERSION }}

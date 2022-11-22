@@ -22,7 +22,7 @@
 name: dependabot-auto
 on: pull_request
 env:
-  GITHUB_TOKEN: ${{ secrets.PAT_DEPENDABOT }}
+  GITHUB_TOKEN: ${{ secrets.PAT_BOT }}
   YARN_ENABLE_IMMUTABLE_INSTALLS: false
 jobs:
   dependabot-auto:
@@ -31,15 +31,15 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.0.1
+        uses: hmarr/debug-action@v2.1.0
       - id: metadata
         name: Fetch metadata
-        uses: dependabot/fetch-metadata@v1.3.3
+        uses: dependabot/fetch-metadata@v1.3.5
         with:
           skip-commit-verification: true
       - id: checkout
         name: Checkout ${{ github.head_ref }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           persist-credentials: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
           ref: ${{ github.head_ref }}
@@ -53,7 +53,7 @@ jobs:
       - id: gpg-import
         name: Import GPG key
         if: steps.metadata.outputs.package-ecosystem == 'npm_and_yarn'
-        uses: crazy-max/ghaction-import-gpg@v5.1.0
+        uses: crazy-max/ghaction-import-gpg@v5.2.0
         with:
           git_commit_gpgsign: true
           git_config_global: true

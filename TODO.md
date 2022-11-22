@@ -5,22 +5,25 @@
 1. Local setup
    - Replace `project-name` with project name (don't forget to skip this line :wink:)
      - Run `yarn` afterwards to update lockfile
-   - Commit scopes
-     - Update [`.commitlintrc.ts`](.commitlintrc.ts)
+   - Commits
+     - Update [`.commitlintrc.json`](.commitlintrc.json)
+     - Review [`.husky/commit-msg`](.husky/commit-msg)
+     - Review [`.husky/pre-commit`](.husky/pre-commit)
+     - Review [`.husky/pre-push`](.husky/pre-push)
+     - Review [`.lintstagedrc.json`](.lintstagedrc.json)
    - Label management
      - Update [`.github/labels.yml`](.github/labels.yml)
    - Package details
-     - Update [`package.json#author`](package.json#L17-L20)
-     - Update [`package.json#description`](package.json#L3)
-     - Update [`package.json#keywords`](package.json#L5)
-     - Review [`package.json#publishConfig`](package.json#L21-L23)
+     - Update `package.json#description`
+     - Update `package.json#keywords`
+     - Review `package.json#publishConfig`
    - Preliminary documentation
      - Review [contributing guide](CONTRIBUTING.md)
      - Update project description in [`README`](README.md)
      - Update [project license](LICENSE.md)
-       - Sync [`package.json#license`](package.json#L8)
+       - Sync `package.json#license`
    - Release management
-     - Check [`package.json#tagPrefix`](package.json#L140)
+     - Check `package.json#tagPrefix`
    - Review @dependabot configuration
      - [`.github/dependabot.yml`](.github/dependabot.yml)
    - Review Yarn configuration
